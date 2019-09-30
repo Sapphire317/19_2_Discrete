@@ -3,10 +3,10 @@
 
 
 
-# How to execute
+# HOW TO EXECUTE
 
 
-##pa102 - Fill a pix
+## PA102 - Fill a pix!
 
 1. Compile pix_lia.c.
 
