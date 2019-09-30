@@ -223,13 +223,14 @@ int main(){
         }
     }
        
+       printf("<<Solution %d>>\n\n", n+1);
        for(int i=1; i<=N; i++){
            for(int j=1; j<=M; j++){
                printf("%d ", Output[i][j]);
            }
            printf("\n");
        }
-       printf("\n");
+       printf("\n\n");
 
     for(int i=1; i<=N; i++){
         for(int j=1; j<=M; j++){
