@@ -51,3 +51,5 @@ sat
   (define-fun p22 () Int
     1)
 )
+(objectives
+)

@@ -1,16 +1,22 @@
 #include <stdio.h>
 #include <string.h>
 
-void combinationUtil(int arr[], int data[], int start, int end,  
-                     int index, int r, int k, int j, int N, int M); 
 
-void printCombination(int arr[], int n, int r, int k, int j, int N, int M) 
+int row_num =1 ;
+int col_num =1 ;
+
+void receiveInputChar(char inputArray[][1001]);
+void input2Grid(char inputArray[][1001]);
+void combinationUtil(int arr[], int data[], int start, int end,  
+                     int index, int r, int k, int j, int N, int M, FILE *fp); 
+
+void printCombination(int arr[], int n, int r, int k, int j, int N, int M, FILE *fp) 
 { 
     // A temporary array to store all combination one by one 
     int data[r]; 
   
     // Print all combination using temprary array 'data[]' 
-    combinationUtil(arr, data, 0, n-1, 0, r, k, j, N, M); 
+    combinationUtil(arr, data, 0, n-1, 0, r, k, j, N, M, fp); 
 } 
   
 /* arr[]  ---> Input Array 
@@ -19,7 +25,7 @@ void printCombination(int arr[], int n, int r, int k, int j, int N, int M)
    index  ---> Current index in data[] 
    r ---> Size of a combination to be printed */
 void combinationUtil(int arr[], int data[], int start, int end, 
-                     int index, int r, int k, int j, int N, int M) 
+                     int index, int r, int k, int j, int N, int M, FILE *fp) 
 { 
     // Current combination is ready to be printed, print it
     int x[9]={0, 0, -1, -1, -1, 0, 1, 1, 1};
@@ -43,23 +49,23 @@ void combinationUtil(int arr[], int data[], int start, int end,
             }
         }
         if(isgood){
-             printf("(and ");  
+             fprintf(fp, "(and ");  
          for(int m=0; m<9; m++){
              //If it is true
              if(check[m]!=0){
                  if(k+x[m] <= N && k+x[m] >=1 && j+y[m] <=M && j+y[m] >= 1){
-                        printf("(= p%d%d 1) ", k+x[m], j+y[m]);
+                        fprintf(fp, "(= p%d%d 1) ", k+x[m], j+y[m]);
                         // printf("(%d, %d)\n", i+x[m], j+y[m]);
                 }
              }else{
                  if(k+x[m] <= N && k+x[m] >=1 && j+y[m] <=M && j+y[m] >= 1){
-                        printf("(= p%d%d 0) ", k+x[m], j+y[m]);
+                        fprintf(fp, "(= p%d%d 0) ", k+x[m], j+y[m]);
                         // printf("(%d, %d)\n", i+x[m], j+y[m]);
                 }
             }
             
         }
-        printf(")");
+        fprintf(fp, ")");
         }
         return; 
     } 
@@ -72,10 +78,41 @@ void combinationUtil(int arr[], int data[], int start, int end,
     for (int i=start; i<=end && end-i+1 >= r-index; i++) 
     { 
         data[index] = arr[i]; 
-        combinationUtil(arr, data, i+1, end, index+1, r, k, j, N, M); 
+        combinationUtil(arr, data, i+1, end, index+1, r, k, j, N, M, fp); 
     }
      
 } 
+
+void receiveInputChar(char inputArray[][1001]){
+	
+	char * lines = 0x0;
+	size_t buf = 0;
+
+	while(getline(&lines, &buf, stdin)!=EOF){
+		int len = strlen(lines);
+		int coldex=1;
+		for(int i = 0 ; i<len ; i++){
+			//pa103에서는 valid 다르게 받아야 함. 10이상의 숫자도 받기 때문. 
+			char c = lines[i];
+			if((c>=48 && c<= 57) || c==63){
+				inputArray[row_num][coldex++] = c;
+			}
+		}
+		if(row_num==1) col_num = coldex;
+		(coldex==col_num) ? row_num++ : 
+			(coldex!=0) ? printf("please input correct grid, same column number before you enter\n") : 0x0;
+			//가장자리 처리 제대로 안하면 쓰레기값 생길 수 있음 배열 넘겨서도 받기 때문.
+	}
+}
+
+void input2Grid(char inputArray[][1001]){
+	for(int i=1 ; i<= row_num ; i++){
+		for(int j=1 ; j<= col_num ; j++){
+			printf("%c ",inputArray[i][j]);	
+		}
+		printf("\n");
+	}
+}
 
 
 
@@ -83,61 +120,34 @@ void combinationUtil(int arr[], int data[], int start, int end,
 int main(){
     char arr[1001][1001];
     int i, j, m, n;
-    int M=0;
-    int N=0;
+    
 
     char buf[1001]={};
 
 
+    receiveInputChar(arr);
+    input2Grid(arr);
 
-    FILE *fp = fopen("p1", "r");
-    
-    if(fp==NULL) {
-        perror("Error opening file");
-        return -1;
-    }
-
-    while(fgets(buf, 1001, fp)){
-        if(N==0){
-            M=strlen(buf)/2;
-        }
-        for(int i=0; i<strlen(buf); i+=2){
-            arr[N+1][i/2+1]=buf[i];
-        }
-        
-        // printf("%lu\n", strlen(buf));
-        N++;
-    }
-
-    // printf("M: %d, N: %d\n", M, N);
-
-
-    // for(i=1; i<=N; i++){
-    //     for(j=1; j<=M; j++){
-    //         printf("%c ", arr[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
-
-
+    FILE * fp = fopen("./pixOutput","w");
+    int M=col_num-1;
+    int N=row_num-1;
     int x[9]={0, 0, -1, -1, -1, 0, 1, 1, 1};
     int y[9]={0, -1, -1, 0, 1, 1, -1, 0, 1};
 
 
     for(i=1; i<=N; i++){
         for(j=1; j<=M; j++){
-            printf("(declare-const p%d%d Int)\n", i, j);
+            fprintf(fp, "(declare-const p%d%d Int)\n", i, j);
         }
     }
 
-    printf("(assert (and ");
+    fprintf(fp, "(assert (and ");
     for(i=1; i<=N; i++){
         for(j=1; j<=M; j++){
-            printf("(and (> p%d%d -1) (< p%d%d 2))", i, j, i, j);
+            fprintf(fp, "(and (> p%d%d -1) (< p%d%d 2))", i, j, i, j);
         }
     }
-    printf("))\n");
+    fprintf(fp, "))\n");
     
 
     int ar[] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; 
@@ -149,23 +159,24 @@ int main(){
     //(assert (and (or~~)))
     //Q
     
-    printf("(assert (and ");
+    fprintf(fp, "(assert (and ");
     for(i=1; i<=N; i++){
         for(j=1; j<=M; j++){
             if(arr[i][j]!='?'){
-                printf("(or ");
+                fprintf(fp, "(or ");
                 r=arr[i][j]-'0';
                 // r= the number of center
                 // i, j = the x, y coordination 
-                 printCombination(ar, s, r, i, j, N, M); 
-                printf(")");
+                 printCombination(ar, s, r, i, j, N, M, fp); 
+                fprintf(fp, ")");
             }
         }
     }
-    printf("))\n");
+    fprintf(fp, "))\n");
 
-    printf("(check-sat)\n(get-model)\n");
+    fprintf(fp, "(check-sat)\n(get-model)\n");
 
     fclose(fp);
+
     return 0;
 }
