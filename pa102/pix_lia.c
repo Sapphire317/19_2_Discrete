@@ -4,6 +4,7 @@
 
 int row_num =1 ;
 int col_num =1 ;
+char Output[1001][1001];
 
 void receiveInputChar(char inputArray[][1001]);
 void input2Grid(char inputArray[][1001]);
@@ -83,6 +84,44 @@ void combinationUtil(int arr[], int data[], int start, int end,
      
 } 
 
+
+void basicCondition(char arr[][1001], int N, int M, FILE *fp){
+    for(int i=1; i<=N; i++){
+        for(int j=1; j<=M; j++){
+            fprintf(fp, "(declare-const p%d%d Int)\n", i, j);
+        }
+    }
+
+    fprintf(fp, "(assert (and ");
+    for(int i=1; i<=N; i++){
+        for(int j=1; j<=M; j++){
+            fprintf(fp, "(and (> p%d%d -1) (< p%d%d 2))", i, j, i, j);
+        }
+    }
+    fprintf(fp, "))\n");
+    
+
+    int ar[] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; 
+    int r; 
+    int s = sizeof(ar)/sizeof(ar[0]); 
+   
+    //Q
+    fprintf(fp, "(assert (and ");
+    for(int i=1; i<=N; i++){
+        for(int j=1; j<=M; j++){
+            if(arr[i][j]!='?'){
+                fprintf(fp, "(or ");
+                r=arr[i][j]-'0';
+                // r= the number of center
+                // i, j = the x, y coordination 
+                 printCombination(ar, s, r, i, j, N, M, fp); 
+                fprintf(fp, ")");
+            }
+        }
+    }
+    fprintf(fp, "))\n");
+}
+
 void receiveInputChar(char inputArray[][1001]){
 	
 	char * lines = 0x0;
@@ -126,57 +165,102 @@ int main(){
 
 
     receiveInputChar(arr);
-    input2Grid(arr);
 
-    FILE * fp = fopen("./pixOutput","w");
+    FILE * fp = fopen("./pixOutput0","w");
     int M=col_num-1;
     int N=row_num-1;
-    int x[9]={0, 0, -1, -1, -1, 0, 1, 1, 1};
-    int y[9]={0, -1, -1, 0, 1, 1, -1, 0, 1};
 
-
-    for(i=1; i<=N; i++){
-        for(j=1; j<=M; j++){
-            fprintf(fp, "(declare-const p%d%d Int)\n", i, j);
-        }
-    }
-
-    fprintf(fp, "(assert (and ");
-    for(i=1; i<=N; i++){
-        for(j=1; j<=M; j++){
-            fprintf(fp, "(and (> p%d%d -1) (< p%d%d 2))", i, j, i, j);
-        }
-    }
-    fprintf(fp, "))\n");
-    
-
-    int ar[] = {0, 1, 2, 3, 4, 5, 6, 7, 8}; 
-    int r; 
-    int s = sizeof(ar)/sizeof(ar[0]); 
-   
-
-
-    //(assert (and (or~~)))
-    //Q
-    
-    fprintf(fp, "(assert (and ");
-    for(i=1; i<=N; i++){
-        for(j=1; j<=M; j++){
-            if(arr[i][j]!='?'){
-                fprintf(fp, "(or ");
-                r=arr[i][j]-'0';
-                // r= the number of center
-                // i, j = the x, y coordination 
-                 printCombination(ar, s, r, i, j, N, M, fp); 
-                fprintf(fp, ")");
-            }
-        }
-    }
-    fprintf(fp, "))\n");
+    basicCondition(arr, N, M, fp);
 
     fprintf(fp, "(check-sat)\n(get-model)\n");
 
     fclose(fp);
+
+
+    char solution[5][1001][1001];
+    char filename[100];
+
+    for(int n=0; n<5; n++){
+
+        sprintf(filename, "z3 pixOutput%d > pixZ3%d", n, n);
+         FILE * rs = popen(filename, "r");
+        char buff[128];
+        fscanf(rs, "%s %s", buff, buff);
+        while(!feof(rs)){
+            fscanf(rs, "%s", buff);
+        }
+        pclose(rs);
+
+        sprintf(filename, "pixZ3%d", n);
+         FILE *z3 = fopen(filename, "r");
+
+            int q, w, e;
+
+            char first[128];
+            char b[128];
+            char ss[128];
+            char t[128];
+
+    //Blow up the first and second line.
+    //Check if there is solution.
+    fscanf(z3, "%s %s", first, b);
+    if(strcmp(first, "sat")!=0){
+        printf("No Solution \n");
+        fclose(z3);
+        return 0;
+    }
+
+    for(int k=0; k < M*N; k++){
+        fscanf(z3, "%s %s %s %s %s", b, ss, b, b, t);
+
+        q = ss[1]-'0';
+        w = ss[2]-'0';
+  
+        if (strcmp(t, "0)") != 0){
+            Output[q][w]=1;
+        }else{
+            Output[q][w]=0;
+        }
+    }
+       
+       for(int i=1; i<=N; i++){
+           for(int j=1; j<=M; j++){
+               printf("%d ", Output[i][j]);
+           }
+           printf("\n");
+       }
+       printf("\n");
+
+    for(int i=1; i<=N; i++){
+        for(int j=1; j<=M; j++){
+            solution[n][i][j]=Output[i][j];
+        }
+    }
+
+    sprintf(filename, "pixOutput%d", n+1);
+    FILE *next = fopen(filename, "w");
+
+    basicCondition(arr, N, M, next);
+
+    
+    for(int i=0; i<=n; i++){
+        fprintf(next, "(assert (not (and ");
+        for(int j=1; j<=N; j++){
+            for(int k=1; k<=M; k++){
+                fprintf(next, "(= p%d%d %d) ", j, k, solution[i][j][k]);
+            }
+        }
+        fprintf(next, ")))\n");
+    }
+
+    fprintf(next, "(check-sat)\n(get-model)\n");
+
+    fclose(next);
+    
+    }
+
+
+   
 
     return 0;
 }
