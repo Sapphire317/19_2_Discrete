@@ -18,14 +18,18 @@
 
 Input the data you want to solve.
 
-``` $ ? ? ? ? 2  
+```
+    $ ? ? ? ? 2  
       ? 9 ? ? ?
       ? 8 8 ? ?
       ? ? ? ? 4
       4 ? 5 ? 2   
 ```
 
-3. You can get the result up to 5.
+3. Press ```CTRL+D``` After you finished putting data.
+
+
+4. You can get the result up to 5.
  
 -    If you don't have any solution, it will print "No solution"
 -    If you have solutions below 5, it will print all but print "No solution at last."
