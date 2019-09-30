@@ -10,20 +10,28 @@
 
 1. Compile pix_lia.c.
 
-``` $ g++ pix_lia.c -o pixlia ```
+``` $ g++ pix_lia.c -o pix ```
 
-2. Get input file using Standard I/O
+2. Input your data that you want to solve (For example..)
 
-``` $ ./pixlia < p1 > pixliaz3 ```
+``` $ ./pix ```
 
-3. Using Z3 solver, you can get the result.
+Input the data you want to solve.
 
-``` $ z3 pixliaz3 > pixliaz3_output ```
+```
+    $ ? ? ? ? 2  
+      ? 9 ? ? ?
+      ? 8 8 ? ?
+      ? ? ? ? 4
+      4 ? 5 ? 2   
+```
 
-4. Compile parse.c
+3. Press ```CTRL+D``` After you finished putting data.
 
-``` $ g++ parse.c -o parser ```
 
-5. Using parser, get the final result.
+4. You can get the result up to 5.
+ 
+-    If you don't have any solution, it will print "No solution"
+-    If you have solutions below 5, it will print all but print "No solution at last."
 
-``` $ ./parser < pixliaz3_output ```
+
