@@ -32,6 +32,6 @@ Input the data you want to solve.
 4. You can get the result up to 5.
  
 -    If you don't have any solution, it will print "No solution"
--    If you have solutions below 5, it will print all but print "No solution at last."
+-    If you have solutions below 5, it will print all but print "No solution" at last.
 
 
