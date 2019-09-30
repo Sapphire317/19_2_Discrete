@@ -14,6 +14,10 @@
 
 2. Input your data that you want to solve (For example..)
 
+``` $ ./pix ```
+
+Input the data you want to solve.
+
 ``` $ ? ? ? ? 2  
       ? 9 ? ? ?
       ? 8 8 ? ?
