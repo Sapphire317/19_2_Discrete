@@ -14,11 +14,12 @@
 
 2. Input your data that you want to solve (For example..)
 
-``` $ ? ? ? ? 2
+``` $ ? ? ? ? 2  
       ? 9 ? ? ?
       ? 8 8 ? ?
       ? ? ? ? 4
-      4 ? 5 ? 2   ```
+      4 ? 5 ? 2   
+```
 
 3. You can get the result up to 5.
  
