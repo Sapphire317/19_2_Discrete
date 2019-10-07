@@ -1,0 +1,53 @@
+sat
+(model 
+  (define-fun p14 () Int
+    1)
+  (define-fun p15 () Int
+    0)
+  (define-fun p25 () Int
+    0)
+  (define-fun p45 () Int
+    0)
+  (define-fun p54 () Int
+    1)
+  (define-fun p44 () Int
+    1)
+  (define-fun p34 () Int
+    1)
+  (define-fun p52 () Int
+    1)
+  (define-fun p42 () Int
+    1)
+  (define-fun p41 () Int
+    1)
+  (define-fun p33 () Int
+    1)
+  (define-fun p32 () Int
+    1)
+  (define-fun p31 () Int
+    1)
+  (define-fun p23 () Int
+    1)
+  (define-fun p13 () Int
+    1)
+  (define-fun p12 () Int
+    1)
+  (define-fun p11 () Int
+    1)
+  (define-fun p21 () Int
+    1)
+  (define-fun p55 () Int
+    0)
+  (define-fun p53 () Int
+    1)
+  (define-fun p51 () Int
+    1)
+  (define-fun p35 () Int
+    1)
+  (define-fun p24 () Int
+    1)
+  (define-fun p43 () Int
+    0)
+  (define-fun p22 () Int
+    1)
+)
