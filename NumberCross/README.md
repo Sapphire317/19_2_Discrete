@@ -22,22 +22,23 @@ Enter make command to compile the source code.
       8 3 9 5 9 2 1 4 9 35 
   ```
       
-Press CTRL+D after you finished putting data  
-
-### Input
-All program receives the inputs by standard input.  
-"NumbCross", its grid size is not fixed. Program doesn't know whether EOF. (Maximum 50 X 50)  
-So, please tester enter "Ctrl+D" after all inputs are entered.  
-Or Just use $ ./NumCross < input  
-
+Press CTRL+D after you finished putting data.  
 
 3. You can get the result.  
 
 If puzzle doesn't have any solution, it will print "No solution".  
-If puzzle has a solution, it will be printed.  
+If puzzle has a solution, it will be printed.   
+
+## Input
+All program receives the inputs by standard input.  
+"NumbCross", its grid size is not fixed. Program doesn't know whether EOF. (Maximum 50 X 50)
+Except for sum of column and row, the input number should be between 0 ~ 9. or error will be occured.   
+So, please tester enter "Ctrl+D" after all inputs are entered.  
+Or Just use ```$ ./NumCross < input```.    
 
 
-### Files
+
+## Files
 Makefile - Build script for CMake  
 NumberCross.c - source code.  
 
