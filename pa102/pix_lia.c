@@ -85,7 +85,7 @@ void combinationUtil(int arr[], int data[], int start, int end,
 } 
 
 
-void basicCondition(char arr[][1001], int N, int M, FILE *fp){
+void basicCondition(char arr[][51], int N, int M, FILE *fp){
     for(int i=1; i<=N; i++){
         for(int j=1; j<=M; j++){
             fprintf(fp, "(declare-const p%d%d Int)\n", i, j);
@@ -158,7 +158,6 @@ void input2Grid(char inputArray[][1001]){
 
 int main(){
     char arr[1001][1001];
-    int i, j, m, n;
     
 
     char buf[1001]={};
