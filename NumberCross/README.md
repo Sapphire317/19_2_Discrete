@@ -5,6 +5,7 @@
 
 1. ``` $ make ```
 
+Enter make command to compile the source code.  
 
 2. 
 ```
@@ -21,22 +22,22 @@
       8 3 9 5 9 2 1 4 9 35 
   ```
       
-Press CTRL+D after you finished putting data,
+Press CTRL+D after you finished putting data  
 
 ### Input
-All program receives the inputs by standard input.
-"NumbCross", its grid size is not fixed. Program doesn't know whether EOF. (Maximum 50 X 50)
-So, please tester enter "Ctrl+D" after all inputs are entered.
-Or Just use $ ./NumCross < input
+All program receives the inputs by standard input.  
+"NumbCross", its grid size is not fixed. Program doesn't know whether EOF. (Maximum 50 X 50)  
+So, please tester enter "Ctrl+D" after all inputs are entered.  
+Or Just use $ ./NumCross < input  
 
 
-3. You can get the result.
+3. You can get the result.  
 
-If puzzle doesn't have any solution, it will print "No solution"
-If puzzle has a solution, it will be printed.
+If puzzle doesn't have any solution, it will print "No solution".  
+If puzzle has a solution, it will be printed.  
 
 
 ### Files
-Makefile - Build script for CMake
-NumberCross.c - source code.
+Makefile - Build script for CMake  
+NumberCross.c - source code.  
 
