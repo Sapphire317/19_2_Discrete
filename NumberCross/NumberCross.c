@@ -255,7 +255,7 @@ void basicCondition(int arr[][51], int N, int M, FILE* fp){
 	char nv[128];
     int q, w, e;
     fscanf(z3, "%s", bury);
-    if(bury[0]=='u'){
+    if(bury[0]=='u' || bury[0]=='('){
         printf("No Solution\n");
 		pclose(z3);
 		return 0;

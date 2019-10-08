@@ -1,0 +1,37 @@
+(error "line 18 column 72: invalid function application, arguments missing")
+(error "line 19 column 17: invalid function application, arguments missing")
+sat
+(model 
+  (define-fun r1c1 () Int
+    0)
+  (define-fun r1c2 () Int
+    0)
+  (define-fun r1c3 () Int
+    0)
+  (define-fun r1c4 () Int
+    0)
+  (define-fun r2c1 () Int
+    0)
+  (define-fun r2c2 () Int
+    0)
+  (define-fun r2c3 () Int
+    0)
+  (define-fun r2c4 () Int
+    0)
+  (define-fun r3c1 () Int
+    0)
+  (define-fun r3c2 () Int
+    0)
+  (define-fun r3c3 () Int
+    0)
+  (define-fun r3c4 () Int
+    0)
+  (define-fun r4c1 () Int
+    0)
+  (define-fun r4c2 () Int
+    0)
+  (define-fun r4c3 () Int
+    0)
+  (define-fun r4c4 () Int
+    0)
+)
