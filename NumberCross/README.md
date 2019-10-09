@@ -31,7 +31,7 @@ If puzzle has a solution, it will be printed.
 
 ## Input
 All program receives the inputs by standard input.  
-"NumbCross", its grid size is not fixed. Program doesn't know whether EOF. (Maximum 50 X 50) .
+"NumbCross", its grid size is not fixed. Program doesn't know whether EOF. (Maximum 50 X 50) .   
 Except for sum of column and row, the input number should be between   1 ~ 9. or error will be occured.   
 So, please tester enter "Ctrl+D" after all inputs are entered.  
 Or Just use ```$ ./NumCross < input```.    
