@@ -75,6 +75,7 @@ int main(){
     FILE *fp = fopen("model.csv", "w");
 
     GHashTableIter iter;
+    int size=g_hash_table_size(negC);
 
     gpointer* val;
     gpointer* key;
@@ -91,6 +92,8 @@ int main(){
     }
     fclose(fp);
 
+
+    printf("Total %d words were stored successfully. \n", size);
 
     
     //printf("Probability of Positive List : %lf\n", bayes_prob(pos_wordList, negC, n_negC));
