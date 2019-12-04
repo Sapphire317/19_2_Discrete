@@ -91,6 +91,7 @@ int main(){
 
     }
 
+    //Rescaling
     prob_neg = pow(10, prob_neg);
     prob_n_neg = pow(10, prob_n_neg);
 
