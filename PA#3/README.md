@@ -16,7 +16,8 @@
 
 3. Compile trainer and predictor.
 
-``` In code folder, ```
+In code folder,
+
 ``` $ make ```
 
 4. First you have to execute trainer to train data.
