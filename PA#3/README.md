@@ -7,7 +7,7 @@
 
 1. Compile libstemmer.c for using text stemmer in libstemmer_c folder.
 
-``` $ cd libstemmer_c ```\n
+``` $ cd libstemmer_c ``` . 
 ``` $ make ```
 
 2. You have to move libstemmer.o into lib folder.
