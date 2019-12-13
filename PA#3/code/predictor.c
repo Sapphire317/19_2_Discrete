@@ -98,6 +98,8 @@ int main(){
     bayes_prob = (prob_neg)/(prob_neg + prob_n_neg);
 
     printf("Probability: %lf\n", bayes_prob);
+	if(prob_neg > 0.9) printf(" / negative");
+	else printf(" / non-negative");
    
 
 
